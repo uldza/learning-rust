@@ -30,8 +30,9 @@ impl fmt::Display for Point2 {
 
 impl fmt::Binary for Point2 {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        // Customize so only `x` and `y` are denoted.
-        write!(f, "x: {}, y: {}", self.x, self.y)
+        let int_x = (self.x * 100.0) as i32;
+        let int_y = (self.y * 100.0) as i32;
+        write!(f, "x: {:b}, y: {:b}", int_x, int_y)
     }
 }
 
@@ -69,7 +70,7 @@ fn main() {
 
     // Error. Both `Debug` and `Display` were implemented but `{:b}`
     // requires `fmt::Binary` to be implemented. This will not work.
-    println!("What does Point2D look like in binary: {:b}?", point);
+    println!("What does Point2D look like in binary: {:b}", point);
 
     let complex = Complex {real: 3.3, imag: 7.2};
     println!("Complex point:");
